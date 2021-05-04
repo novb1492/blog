@@ -7,8 +7,8 @@ let point;
 function preload()
 { 
   //call sheep image and position
-  spritedata= loadJSON('p5/horse/horse.json');
-  spritesheet = loadImage('p5/sheep.png');
+  spritedata= loadJSON('horse.json');
+  spritesheet = loadImage('sheep.png');
 }
 
 function setup() {
