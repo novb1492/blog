@@ -1,8 +1,10 @@
 class Point{
-    constructor(){}
+    constructor(totalpoints){
+        this.totalpoints=totalpoints;
+    }
     returnx()
     {
-        let x=[displayWidth,displayWidth*3/4,displayWidth*2/4,displayWidth/4,beforepointx];
+        let x=[0,displayWidth/4,displayWidth*3/4,displayWidth];
         if(x.length==this.totalpoints)
         {
         return x;
@@ -13,10 +15,7 @@ class Point{
     }
     returny()
     {
-    let y=[];
-    let siny=map(sin(PI/2),-1,1,500,displayHeight-(displayHeight-windowHeight)-50);
-    let siny2=map(sin(PI),1,-1,500,displayHeight-(displayHeight-windowHeight)-50);
-        y=[siny2,siny,siny2,siny,siny2];
+    let y=[displayHeight/2,displayHeight,displayHeight/5,displayHeight/2];
     if(y.length==this.totalpoints)
     {
         return y;

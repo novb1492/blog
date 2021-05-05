@@ -3,33 +3,26 @@ class Bezier
     constructor(totalsteps)
     {
         this.totalsteps=totalsteps;
-        this.endx=0;
-        this.endy=displayHeight/2;
-        this.endx2=displayWidth/4;
-        this.endy2=displayHeight;
-        this.startx2=displayWidth*3/4;
-        this.starty2=displayHeight/5;
-        this.startx=displayWidth;
-        this.starty=displayHeight/2;
+
     }
-    getXY(ii)
+    getXY(ii,pointsx,pointsy)
     {
         var array=[];
 
         var t = ii/ this.totalsteps;
         
-        array[0]= bezierPoint(this.startx,this.startx2,this.endx2,this.endx,t);
-        array[1]=bezierPoint(this.starty,this.starty2,this.endy2,this.endy,t);
-        let tx = bezierTangent(this.startx,this.startx2,this.endx2,this.endx,t);
-        let ty = bezierTangent(this.starty,this.starty2,this.endy2,this.endy,t);
+        array[0]= bezierPoint(pointsx[3],pointsx[2],pointsx[1],pointsx[0],t);
+        array[1]=bezierPoint(pointsy[3],pointsy[2],pointsy[1],pointsy[0],t);
+        let tx = bezierTangent(pointsx[3],pointsx[2],pointsx[1],pointsx[0],t);
+        let ty = bezierTangent(pointsy[3],pointsy[2],pointsy[1],pointsy[0],t);
         array[2] = atan2(ty, tx);
         return array;
         
     }
-    drawbezier()
+    drawbezier(pointsx,pointsy)
     {
         noFill();
-        bezier(this.endx,this.endy,this.endx2,this.endy2,this.startx2,this.starty2,this.startx,this.starty);
+        bezier(pointsx[0],pointsy[0],pointsx[1],pointsy[1],pointsx[2],pointsy[2],pointsx[3],pointsy[3]);
     }
 
 }
