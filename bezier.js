@@ -3,7 +3,8 @@ class Bezier
     constructor(totalsteps)
     {
         this.totalsteps=totalsteps;
-
+        this.secondx=200;
+        this.secondy=200;
     }
     getXY(ii,pointsx,pointsy)
     {
@@ -22,7 +23,10 @@ class Bezier
     drawbezier(pointsx,pointsy)
     {
         noFill();
-        bezier(pointsx[0],pointsy[0],pointsx[1],pointsy[1],pointsx[2],pointsy[2],pointsx[3],pointsy[3]);
+        for(var i=pointsx.length;i>0;i--)
+        {
+        bezier(pointsx[i-1],pointsy[i-1],pointsx[i-1]+this.secondx,pointsy[i-1]+this.secondy,pointsx[i]-this.secondx,pointsy[i]-this.secondy,pointsx[i],pointsy[i]);
+        }
     }
 
 }

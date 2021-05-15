@@ -4,9 +4,10 @@ let animation=[];
 let sheep;
 let hill;
 let point;
-let totalpoints=4;
+let totalpoints=5;
 let pointsx=[];
 let pointsy=[];
+let pointsw=0;
 function preload()
 { 
   //call sheep image and position
@@ -30,16 +31,42 @@ function setup() {
     hill=new Bezier(480);
     point=new Point(totalpoints);
 }
-var x=500,y=500,i=0;
+var i=0;
 var catcharray=[];
   function draw() 
   {  
    background('gray');
-   pointsx=point.returnx();
-   pointsy=point.returny();
+   getpointxy();
+   pointsw=swsystem(pointsw);
    hill.drawbezier(pointsx,pointsy);
    i++;
+   console.log(pointsx);
    catcharray=hill.getXY(i,pointsx,pointsy);
-    sheep.draw(catcharray);
+   movesystem(totalpoints,pointsx,1);
+    //sheep.draw(catcharray);
+ 
+  }
+  function swsystem(sw)
+  {
+    if(sw==0)
+    {
+      return sw=1;
+    }
+
+  }
+  function getpointxy()
+  {
+    if(pointsw==0)
+    {
+      pointsx=point.returnx();
+      pointsy=point.returny();
+    }
+  }
+  function movesystem(totalcount,xarray,speed)
+  {
+    for(var i=0;i<totalcount;i++)
+    {
+      xarray[i]+=speed;
+    }
   }
  
