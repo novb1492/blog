@@ -1,12 +1,14 @@
 class Bezier
 {
-    constructor(totalsteps)
+    constructor(totalsteps,totalpoints,pointbundle)
     {
         this.totalsteps=totalsteps;
+        this.totalpoints=totalpoints;
+        this.pointbundle=pointbundle;
         this.secondx=200;
         this.secondy=200;
     }
-    getXY(ii,pointsx,pointsy)
+    /*getXY(ii,pointsx,pointsy)
     {
         var array=[];
 
@@ -19,13 +21,16 @@ class Bezier
         array[2] = atan2(ty, tx);
         return array;
         
-    }
-    drawbezier(pointsx,pointsy)
+    }*/
+    drawbezier(pointx,pointy)
     {
         noFill();
-        for(var i=pointsx.length;i>0;i--)
-        {
-        bezier(pointsx[i-1],pointsy[i-1],pointsx[i-1]+this.secondx,pointsy[i-1]+this.secondy,pointsx[i]-this.secondx,pointsy[i]-this.secondy,pointsx[i],pointsy[i]);
+        for(var ii=0;ii<this.pointbundle;ii++)
+        { 
+          for(var i=this.totalpoints-1;i>0;i--)
+          {
+          bezier(pointx[ii][i-1],pointy[ii][i-1],pointx[ii][i-1]+this.secondx,pointy[ii][i-1]+this.secondy,pointx[ii][i]-this.secondx,pointy[ii][i]-this.secondy,pointx[ii][i],pointy[ii][i]);
+          }
         }
     }
 

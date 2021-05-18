@@ -2,9 +2,9 @@ class Point{
     constructor(totalpoints){
         this.totalpoints=totalpoints;
     }
-    returnx()
+    returnx(beforepointx)
     {
-        let x=[0,displayWidth/4,displayWidth*2/4,displayWidth*3/4,displayWidth];
+        let x=[-displayWidth,-displayWidth*3/4,-displayWidth*2/4,-displayWidth/4,beforepointx];
   
         return x;
     
