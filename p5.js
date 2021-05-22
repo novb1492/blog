@@ -2,6 +2,8 @@ var spritedata;
 var spritesheet;
 let animation=[];
 let sheep;
+let sheepsw=0;
+let sheeppos=[];
 let hill;
 let point;
 let totalpoints=5;
@@ -9,6 +11,7 @@ let pointbundle=2;
 let pointsx=[];
 let pointsy=[];
 let pointsw=0;
+let hillspeed;
 function preload()
 { 
   //call sheep image and position
@@ -29,7 +32,19 @@ function returnmin(array)
 function setup() {
   var framerate=60;
   frameRate(framerate);
-    createCanvas(displayWidth,displayHeight);
+  createCanvas(displayWidth,displayHeight);
+  ////현재시간까지 진행사항에 따른 양x좌표만들기
+  var totaldayhour=24-6;////하루총 시간
+  var totalmin=totaldayhour*60;
+  var nowmin=(hour()-6)*60+minute();///최초접속시간
+  var percent=nowmin/totalmin;////////현재까지 진행률 분으로 계산
+  percent=percent.toFixed(3);
+  var speed=displayWidth/4/(totaldayhour/4*60)/60/framerate;///4.5시간에 한줄씩
+  sheepx=displayWidth-displayWidth*percent;////////////현재좌표 저장
+  //양속도및 언덕속도 설정
+  hillsspeed=1;
+  speed=speed.toFixed(5);
+  sheepspeed=parseFloat(speed);//문자열->실수
     var frames=[],animation=[];
     frames=spritedata.frames;
     for (var i = 0; i < frames.length; i++) {
@@ -60,10 +75,33 @@ var catcharray=[];
    i++;
    console.log(pointsx);
    //catcharray=hill.getXY(i,pointsx,pointsy);
-   movesystem(2,totalpoints,pointsx,1);
+   sheepxyz();
+   sheep.draw(sheeppos);
+   sheepx-=sheepspeed;
+   movesystem(2,totalpoints,pointsx,hillsspeed);
     //sheep.draw(catcharray);
  
   }
+  function sheepxyz()
+{
+  if(sheeppos=="next")
+  {
+    sheepsw=1;
+  }
+  else if(sheeppos=="reset")
+  {
+    sheepsw=0;
+  }
+  if(sheepsw==0)
+  {
+    px=pointsx[0],py=pointsy[0];
+  }
+  else if(sheepsw==1)
+  {
+    px=pointsx[1],py=pointsy[1];
+  }
+  sheeppos=hill.gety2(px,py,sheepsw);
+}
   function swsystem(swnum,xarray,xarray2,target1,target2)
   {
     if(Math.floor(returnmin(xarray))==target1)
